@@ -78,11 +78,13 @@ const initialCountListener = function () {
   const chartItems = getChartItems( itemsObj );
   document.getElementById( "initial-count" ).innerText = chartItems.length;
 };
-
+const nameField = document.getElementById( "name" );
+const salaryField = document.getElementById( "salary" );
 function addRecordHandler() {
-  const name = document.getElementById( "name" ).value;
-  const salary = document.getElementById( "salary" ).value;
-
+  const name = nameField.value;
+  const salary = salaryField.value;
+  nameField.value = "";
+  salaryField.value = "";
   if ( !name || !salary ) {
     showDataError( name, salary );
     return;
@@ -225,7 +227,7 @@ const uniquifyNames = function ( items ) {
   const uniqueNames = {};
 
   return items.map( function ( item ) {
-    if ( uniqueNames[ item.name ] !== "" ) {
+    if ( uniqueNames[ item.name ] !== undefined ) {
       uniqueNames[ item.name ] += " ";
       item.name += uniqueNames[ item.name ];
     } else {
